@@ -11,19 +11,48 @@
     <div>
         {{test}}
     </div>
-    <div ng-repeat="butts in players | orderBy: '-name'">
-        <span ng-click="incrementLevel(butts)">+</span>
-         / 
-        <span ng-click="decrementLevel(butts)">-</span>
-        {{butts.name}}, Level: {{butts.level}}
-    </div>
-    <form ng-submit="addPlayer()">
-        <label>Name <input type="text" ng-model="title"></label>
+    <div ng-repeat="chars in heroes| orderBy: '-name'">
+        <div class="characterCustomizer">
+            <div class="creativeStats">
+                <div class="Name">
+                    <label>Cape Name:</label>
+                    {{chars.name}}
+                </div>
+            </div>
 
-        <label>Rank <input type="number" ng-model="level"></label>
+            <div id="hardStats">
+                <div id="header">
+                    <div id="classificationLabel">Classifications</div>
+                    <div id="remainingPointsLabel">Points Left</div>
+                </div>
+                <div id="classifications" ng-repeat="classes in chars.classifications">
+                    <span ng-click="incrementLevel(classes)">+</span>
+                    /
+                    <span ng-click="decrementLevel(classes)">-</span>
+
+                    {{classes.name}} Level: {{classes.level}}
+                    <!-- In here goes the categories and such -->
+                </div>
+            </div>
+
+            <div id="descriptiveStats">
+                <label>Power Description
+                <textarea id="powerDescriptionText"
+                          cols = 60>Describe the Cape's Powers Here</textarea>
+                </label>
+            </div>
+
+        </div>
+
+
+    </div>
+    <form ng-submit="addClassification()">
+        <label>Classification <input type="text" ng-model="classification"></label>
+
+        <label>Rank <input type="number" ng-model="rank"></label>
 
         <button type="submit">Post</button>
     </form>
-    <button ng-click="addPlayer()">Scrub it Up</button>
+    <!---<button ng-click="addClassification()">Scrub it Up</button> -->
 </body>
 </html>

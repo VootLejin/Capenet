@@ -32,18 +32,20 @@ app.controller('MainCtrl',[
             }
 
         ];
-        $scope.addPlayer = function(){
+        /*
+        $scope.addClassification = function(){
             if(!$scope.title || $scope.title === ''){return;}
             if(!$scope.level || $scope.level === 0){return;}
             $scope.players.push({name: $scope.title, level: $scope.level});
             $scope.title = '';
             $scope.level = 0;
         };
-        $scope.incrementLevel = function(player){
-            player.level += 1;
+        */
+        $scope.incrementLevel = function(classification){
+            classification.level += 1;
         };
-        $scope.decrementLevel = function(player){
-            player.level -= 1;
+        $scope.decrementLevel = function(classification){
+            classification.level -= 1;
         };
     }
 ]);
