@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Caped Creations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="flapperNews" ng-controller="MainCtrl">
+    <div>
+        {{test}}
+    </div>
+    <div ng-repeat="butts in players | orderBy: '-name'">
+        <span ng-click="incrementLevel(butts)">+</span>
+         / 
+        <span ng-click="decrementLevel(butts)">-</span>
+        {{butts.name}}, Level: {{butts.level}}
+    </div>
+    <form ng-submit="addPlayer()">
+        <input type="text" ng-model="title">
+        <input type="number" ng-model="level">
+        <button type="submit">Post</button>
+    </form>
+    <button ng-click="addPlayer()">Scrub it Up</button>
+</body>
+</html>
