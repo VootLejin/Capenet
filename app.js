@@ -14,10 +14,23 @@ app.controller('MainCtrl',[
     '$scope',
     function($scope){
         $scope.test = "Hello, World!";
-        $scope.players = [
-            {name: "mike", level: 125},
-            {name: "alex", level: 19},
-            {name: "matt", level: 35}
+        $scope.heroes = [
+            {name: "Joe", classifications: [
+                {name: "Mover",     level: 0},
+                {name: "Shaker",    level: 0},
+                {name: "Brute",     level: 0},
+                {name: "Breaker",   level: 0},
+                {name: "Master",    level: 0},
+                {name: "Tinker",    level: 0},
+                {name: "Blaster",   level: 0},
+                {name: "Thinker",   level: 0},
+                {name: "Striker",   level: 0},
+                {name: "Changer",   level: 0},
+                {name: "Trump",     level: 0},
+                {name: "Stranger",  level: 0}
+                ]
+            }
+
         ];
         $scope.addPlayer = function(){
             if(!$scope.title || $scope.title === ''){return;}
