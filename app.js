@@ -1,51 +1,46 @@
-/**
- * Created by voot on 5/11/17.
- */
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
-// Ok, lets break this down...
-    //Declare a variable app
-            // From the node Package angular's Module Method
-            // The Module is called flapperNews
-var app = angular.module('flapperNews', []);
+var index = require('./routes/index');
+var users = require('./routes/users');
 
-// Creates a controller in app
-    // Name MainCtrl
-app.controller('MainCtrl',[
-    '$scope',
-    function($scope){
-        $scope.test = "Hello, World!";
-        $scope.heroes = [
-            {name: "Joe", classifications: [
-                {name: "Mover",     level: 0},
-                {name: "Shaker",    level: 0},
-                {name: "Brute",     level: 0},
-                {name: "Breaker",   level: 0},
-                {name: "Master",    level: 0},
-                {name: "Tinker",    level: 0},
-                {name: "Blaster",   level: 0},
-                {name: "Thinker",   level: 0},
-                {name: "Striker",   level: 0},
-                {name: "Changer",   level: 0},
-                {name: "Trump",     level: 0},
-                {name: "Stranger",  level: 0}
-                ]
-            }
+var app = express();
 
-        ];
-        /*
-        $scope.addClassification = function(){
-            if(!$scope.title || $scope.title === ''){return;}
-            if(!$scope.level || $scope.level === 0){return;}
-            $scope.players.push({name: $scope.title, level: $scope.level});
-            $scope.title = '';
-            $scope.level = 0;
-        };
-        */
-        $scope.incrementLevel = function(classification){
-            classification.level += 1;
-        };
-        $scope.decrementLevel = function(classification){
-            classification.level -= 1;
-        };
-    }
-]);
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', index);
+app.use('/users', users);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
