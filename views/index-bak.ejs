@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Caped Creations</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel ="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="/javascripts/angularApp.js"></script>
+</head>
+<body ng-app="flapperNews" ng-controller="MainCtrl">
+    <div>
+        {{test}}
+    </div>
+
+    <div ng-repeat="chars in heroes| orderBy: '-name'">
+        <div class="characterCustomizer">
+            <div class="creativeStats">
+                <div class="Name">
+                    <label>Cape Name:</label>
+                    {{chars.name}}
+                </div>
+            </div>
+
+            <div id="hardStats">
+                <div id="header">
+                    <div id="classificationLabel">Classifications</div>
+                    <div id="remainingPointsLabel">Points Left</div>
+                </div>
+                <div id="classifications" ng-repeat="classes in chars.classifications">
+                    <span ng-click="incrementLevel(classes)">+</span>
+                    /
+                    <span ng-click="decrementLevel(classes)">-</span>
+
+                    {{classes.name}} Level: {{classes.level}}
+                    <!-- In here goes the categories and such -->
+                </div>
+            </div>
+
+            <div id="descriptiveStats">
+                <label>Power Description
+                <textarea id="powerDescriptionText"
+                          cols = 60>Describe the Cape's Powers Here</textarea>
+                </label>
+            </div>
+
+        </div>
+
+
+    </div>
+    <form action="/herosubmit">
+        <label>Name<input type="text" ng-model="classification"></label>
+
+        <label>Rank <input type="number" ng-model="rank"></label>
+
+        <button type="submit">Post</button>
+    </form>
+    <!---<button ng-click="addClassification()">Scrub it Up</button> -->
+</body>
+</html>
