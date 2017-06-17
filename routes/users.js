@@ -9,11 +9,12 @@ router.get('/', function(req, res, next) {
   getusers(userList, function(err, usersArray){
     if (err){
       //Error Response
+    } else {
+        usersArray.forEach(function (userName) {
+            userList.users.push(userName.name);
+        });
+        res.render('users', userList);
     }
-      usersArray.forEach(function (userName) {
-          userList.users.push(userName.name);
-      });
-      res.render('users', userList);
   });
 
 });
