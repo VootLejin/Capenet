@@ -14,9 +14,12 @@ var capeSchema = new Mongoose.Schema({
     creationMethod: String,
     powers: [{classification: String, rating: Number}],
     description: String,
-    created: {
+    dateCreated: {
         type: Date,
         default: Date.now
+    },
+    creator: {
+        type: String
     }
 });
 
