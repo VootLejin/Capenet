@@ -1,7 +1,7 @@
 /**
  * Created by voot on 6/13/17.
  */
-var User = require('../models/user');
+var User = require('../models/usermodel');
 
 var makeuser = function(name) {
     var myUser = new User({});
