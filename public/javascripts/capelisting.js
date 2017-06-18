@@ -18,11 +18,7 @@ app.controller('capelistingctrl', function($scope, $http){
             $scope.capeList.push({ 'name': 'There was an error... (capelisting, fetch)'});
         });
     };
-
-    /*
-     * addEntry adds entries to the current list of capes
-     */
-    $scope.addEntry = function(callback){
-
-    };
+    for (var i = 0; i < 5; i++){
+        $scope.fetch(null);
+    }
 });
