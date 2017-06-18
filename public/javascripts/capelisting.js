@@ -2,7 +2,7 @@
  * Created by voot on 6/18/17.
  */
 
-var app = angular.module('capeListing');
+var app = angular.module('capeListing',[]);
 
 app.controller('capelistingctrl', function($scope, $http){
     // initializers

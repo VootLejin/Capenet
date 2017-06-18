@@ -10,6 +10,11 @@ var randomcape = require('../controllers/getrandomcape');
 /* GET Cape Listing */
 /* Shows 5 capes by default */
 router.get('/', function (req, res, next){
+    res.render('capelisting');
+});
+
+/* GET Cape Edit */
+router.get('/edit', function (req, res, next){
     res.render('capeedit');
 });
 
