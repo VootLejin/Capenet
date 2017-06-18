@@ -13,5 +13,18 @@
     "express": "~4.15.2",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
-  }
+  },
+  "description": "host a super power rating website",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VootLejin/Capenet.git"
+  },
+  "author": "Alex King",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VootLejin/Capenet/issues"
+  },
+  "homepage": "https://github.com/VootLejin/Capenet#readme"
 }

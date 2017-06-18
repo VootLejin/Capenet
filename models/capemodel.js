@@ -3,6 +3,7 @@
  */
 
 var Mongoose = require('mongoose');
+var random = require('mongoose-random');
 var myConnection = Mongoose.connect('mongodb://localhost/capenet');
 
 var capeSchema = new Mongoose.Schema({
@@ -22,6 +23,8 @@ var capeSchema = new Mongoose.Schema({
         type: String
     }
 });
+
+capeSchema.plugin(random);
 
 var Cape = myConnection.model('Capecharacters', capeSchema);
 
