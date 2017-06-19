@@ -40,7 +40,7 @@
                     <md-lists>
                         <md-list-items ng-repeat="item in powers">
                             <div class="col-xs-6">
-                                <select class="form-control">
+                                <select ng-model="item.classification" class="form-control">
                                     <option ng-repeat="power in defaultClasses">{{power}}</option>
                                 </select>
                             </div>
@@ -48,6 +48,7 @@
                                 <input type="number"
                                        id="class-power-level"
                                        min="-3" max="13" step="1" value="0"
+                                       ng-model="item.rating"
                                        class="form-control">
                             </div>
                         </md-list-items>
@@ -65,8 +66,12 @@
         </form>
         <p ng-bind="name"></p>
         <p ng-bind="description"></p>
+        <p>Points Remaining: {{points}}</p>
+        <p>Classes rolled: {{numClasses}}</p>
         <input type="submit" ng-click="submit()" value = "Save" />
         <input type="submit" ng-click="lazyInit()" value = "Lazy Init (Remove)"/>
+        <input type="submit" ng-click="addPowerClass()" value = "Add additional Rating"/>
+        <input type="submit" ng-click="randomPower()" value = "Random Power" />
         <p>{{creator}}</p>
         </div>
     </div>
