@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="capenet">
+<head>
+    <meta charset="UTF-8">
+    <title>Caped Creations</title>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel ="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js"></script>
+
+    <script src="javascripts/capenet.js"></script>
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/"> Cape Net </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#/"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="#capes"><i class="fa fa-home"></i> Capes</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div id="main">
+    <div ng-view>
+
+    </div>
+</div>
+<script src="javascripts/preload.js"></script>
+<script src="javascripts/home.js"></script>
+<script src="javascripts/capes.js"></script>
+</body>

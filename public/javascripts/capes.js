@@ -1,12 +1,22 @@
 /**
- * Created by voot on 6/18/17.
+ * Created by voot on 6/19/17.
  */
 
-var app = angular.module('capeListing',[]);
+'use strict';
+//var app = angular.module('capenet', ['ngRoute', 'ngResource']);
+
+
+app.config(['$routeProvider', function($routeProvider){
+    $routeProvider.when('/capes', {
+        templateUrl : 'views/capes.html',
+        controller  : 'capelistingctrl'
+    });
+}]);
 
 app.controller('capelistingctrl', function($scope, $http){
     // initializers
     $scope.capeList = [];
+    $scope.message = "Cape Listing page!";
 
     //functions
     /* Fetch gets an entry from the DB */
