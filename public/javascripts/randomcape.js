@@ -1,22 +1,19 @@
 /**
  * Created by voot on 6/19/17.
  */
-
 'use strict';
-//var app = angular.module('capenet', ['ngRoute', 'ngResource']);
-
 
 app.config(['$routeProvider', function($routeProvider){
-    $routeProvider.when('/capes', {
-        templateUrl : 'views/capes.html',
-        controller  : 'capeListingController'
+    $routeProvider.when('/randomcape', {
+        templateUrl : 'views/randomcape.html',
+        controller  : 'randomCapeController'
     });
 
 }]);
 
-app.controller('capeListingController', function($scope, $http){
+app.controller('randomCapeController', function($scope, $http){
     // initializers
-    $scope.capeList = [];
+    $scope.capes = {};
     $scope.message = "Cape Listing page!";
 
     //functions
@@ -24,12 +21,11 @@ app.controller('capeListingController', function($scope, $http){
     $scope.fetch = function(callback){
         // Go to /random, get an entry.
         $http.get('cape/random').then(function success(response){
-            $scope.capeList.push(response.data);
+            $scope.capes= response.data;
         }, function failure(response){
-            $scope.capeList.push({ 'name': 'There was an error... (capelisting, fetch)'});
+            $scope.capes= { 'name': 'There was an error... (capelisting, fetch)'};
         });
     };
-
 
 
 });
