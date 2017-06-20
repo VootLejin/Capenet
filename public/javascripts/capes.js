@@ -9,11 +9,11 @@
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/capes', {
         templateUrl : 'views/capes.html',
-        controller  : 'capelistingctrl'
+        controller  : 'capeListingController'
     });
 }]);
 
-app.controller('capelistingctrl', function($scope, $http){
+app.controller('capeListingController', function($scope, $http){
     // initializers
     $scope.capeList = [];
     $scope.message = "Cape Listing page!";
@@ -28,7 +28,7 @@ app.controller('capelistingctrl', function($scope, $http){
             $scope.capeList.push({ 'name': 'There was an error... (capelisting, fetch)'});
         });
     };
-    for (var i = 0; i < 5; i++){
-        $scope.fetch(null);
-    }
+
+
+
 });

@@ -1,8 +1,31 @@
-<p>Capes!</p>
 <input type="submit" ng-click="fetch()" value = "Another one!" />
-{{message}}
-<md-list>
-    <md-list-item ng-repeat="capes in capeList">
-        <p>{{capes.name}}</p>
-    </md-list-item>
-</md-list>
+<div class="container">
+    <md-list>
+        <md-list-item ng-repeat="capes in capeList">
+            <div class = "row">
+                <div class="col-sm-9">
+                    {{capes.name}}
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-6">
+                            Theme: {{capes.powerTheme}}
+                        </div>
+                        <div class="col-xs-8 col-sm-6">
+                            Creator: {{capes.creator}}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-9">
+                    <md-lists>
+                        <md-list-items ng-repeat="power in capes.powers">
+                            {{power.classification}} {{power.rating}}
+                        </md-list-items>
+                    </md-lists>
+                </div>
+                <div class="col-sm-9">
+                    <p>{{capes.description}}</p>
+                </div>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
