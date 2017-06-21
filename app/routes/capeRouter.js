@@ -37,11 +37,10 @@ router.get('/id/:capeId', function(req, res, next){
         }
     });
 });
-/* GET Cape/random Listing */
 
+/* GET Cape/random Listing */
 /* gets a random(?) cape from the Database */
 router.get('/random', function(req, res, next){
-    var capeList = [];
     CapeController.randomcape(function(err, result){
         if(err){
 
@@ -50,9 +49,9 @@ router.get('/random', function(req, res, next){
     });
 
 });
+
 /* GET Cape/search */
 /* Used for Generic Searches*/
-
 router.get('/search', function(req,res,next){
     // Should Strip out unused fields
     var searchCriteria = stripFields(req.query);
@@ -93,7 +92,6 @@ router.post('/id/:capeId', function(req, res, next){
         if(err){
             res.send({error: "Error on editing the cape (pre-result)"});
         } else {
-            console.log(result);
             res.send(result);
         }
     });
