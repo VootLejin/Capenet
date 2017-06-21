@@ -19,6 +19,7 @@ app.controller('capeEditController', function($scope, $http, capeHandlingFactory
     $scope.powers = [{classification: 'Mover', rating: 0}];
     $scope.basePoints = 0;
     $scope.points = 0;
+    $scope.deleteCount = 0;
 
     $scope.cape = capeHandlingFactory.capeList[0];
 
@@ -38,5 +39,17 @@ app.controller('capeEditController', function($scope, $http, capeHandlingFactory
     $scope.addPowerClass = function(){
         $scope.cape.powers.push({classification: 'Mover', rating: 0});
     };
+
+    $scope.verifyDelete = function(){
+        if($scope.deleteCount < 1){
+            $scope.deleteCount = 1;
+            alert("You are about to Delete this cape! Click the Delete button again to do so.");
+        } else {
+            $http.post("/cape/delete/" + $scope.cape._id).then(function success(response){
+                alert("Cape Deleted");
+            });
+        }
+
+    }
 
 });

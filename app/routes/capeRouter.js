@@ -64,7 +64,6 @@ router.get('/search', function(req,res,next){
     scrubETag(res);
     // Should Strip out unused fields
     var searchCriteria = stripFields(req.query);
-    console.log(searchCriteria);
 
     // Hand to Controller
     CapeController.getCapesByFields(searchCriteria, function(err, result){
@@ -119,7 +118,6 @@ router.post('/id/:capeId', function(req, res, next){
     scrubETag(res);
     var updateInfo = req.body.cape;
     var id = req.params.capeId;
-    console.log(updateInfo);
     CapeController.editCape(id, updateInfo, function (err, result){
         if(err){
             res.send({error: "Error on editing the cape (pre-result)"});
@@ -133,8 +131,10 @@ router.post('/id/:capeId', function(req, res, next){
 /* Post cape/delete */
 /* Used to delete cape entries. */
 router.post('/delete/:capeId', function(req, res, next){
+
     scrubETag(res);
     var id = req.params.capeId;
+    console.log("Deleting Cape, Id: " + id);
     CapeController.deleteCape(id, function(err, result){
         if(err){
 
