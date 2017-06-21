@@ -12,6 +12,8 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('capeSearchController', function($scope,$http, capeHandlingFactory){
+    console.log(capeHandlingFactory.capeList);
+    $scope.capeHandlingFactory = capeHandlingFactory;
     $scope.submitSearch = function(callback){
         delete $scope.searchResults;
         $http.get('cape/search', {
@@ -29,10 +31,13 @@ app.controller('capeSearchController', function($scope,$http, capeHandlingFactor
             $scope.searchResults = response.data;
             // update Cape Handler
             if($scope.searchResults.length === 1){
-                capeHandlingFactory.singleCape = $scope.searchResults[0];
+                console.log("1 result");
+                capeHandlingFactory.setSingleCape($scope.searchResults[0]);
             } else {
+                console.log("many results");
                 capeHandlingFactory.capeList = $scope.searchResults;
             }
+            console.log($scope.searchResults);
 
         }, function failure(response){
             // Failed to Reach server

@@ -16,15 +16,18 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('capeViewController', function($scope,$http,$routeParams, capeHandlingFactory){
+    console.log(capeHandlingFactory.capeList);
     $scope.capeHandlingFactory = capeHandlingFactory;
-    $scope.cape = capeHandlingFactory.singleCape;
+    $scope.cape = capeHandlingFactory.capeList[0];
 });
 
 app.controller('capeViewIdController', function($scope,$http,$routeParams, capeHandlingFactory){
+    console.log(capeHandlingFactory.capeList);
+    $scope.capeHandlingFactory = capeHandlingFactory;
     var id = $routeParams.id;
     $http.get('cape/id/'+id).then(function success(response){
-        capeHandlingFactory.singleCape = response.data;
-        $scope.cape = capeHandlingFactory.singleCape;
+        capeHandlingFactory.setSingleCape(response.data);
+        $scope.cape = capeHandlingFactory.capeList[0];
     }, function failure(response){
 
     });

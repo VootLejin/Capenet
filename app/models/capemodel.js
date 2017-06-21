@@ -24,7 +24,7 @@ var capeSchema = new Mongoose.Schema({
     }
 });
 
-var defaultResults = 'name powerTheme creationMethod powers description dateCreated creator';
+var defaultResults = 'name powerTheme creationMethod powers description dateCreated creator _id';
 
 capeSchema.plugin(random);
 

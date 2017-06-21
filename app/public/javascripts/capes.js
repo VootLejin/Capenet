@@ -12,10 +12,11 @@ app.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-app.controller('capeListingController', function($scope, $http){
+app.controller('capeListingController', function($scope, $http, capeHandlingFactory){
+    $scope.capeHandlingFactory = capeHandlingFactory;
     // initializers
     $scope.capeList = [];
-    $scope.message = "Cape Listing page!";
+    capeHandlingFactory.capeList = [];
 
     //functions
     /* Fetch gets an entry from the DB */

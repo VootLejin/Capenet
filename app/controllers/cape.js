@@ -79,7 +79,14 @@ var CapeController = {
 
     /* Update */
     editCape    : function(id, capeInfo, callback){
-        Cape.update(id, { $set: capeInfo}, callback);
+        console.log(id);
+        console.log(capeInfo);
+        Cape.update({_id: id}, { $set: capeInfo}, callback);
+    },
+
+    /* Delete */
+    deleteCape  : function(id, callback){
+        Cape.remove({_id: id}, callback);
     }
 };
 

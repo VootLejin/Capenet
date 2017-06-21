@@ -12,6 +12,7 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('capeEditController', function($scope, $http, capeHandlingFactory) {
+    console.log(capeHandlingFactory.capeList);
     $scope.defaultClasses = ['Mover', 'Shaker', 'Brute', 'Breaker',
         'Master', 'Tinker', 'Blaster', 'Thinker',
         'Striker', 'Changer', 'Trump', 'Stranger'];
@@ -19,7 +20,7 @@ app.controller('capeEditController', function($scope, $http, capeHandlingFactory
     $scope.basePoints = 0;
     $scope.points = 0;
 
-    $scope.cape = capeHandlingFactory.singleCape;
+    $scope.cape = capeHandlingFactory.capeList[0];
 
     $scope.submit = function(){
         var capeInfo = {cape:{

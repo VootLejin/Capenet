@@ -3,23 +3,17 @@
  */
 
 var app = angular.module('capenet', ['ngRoute', 'ngResource']);
-
-/*var cleanCapeModel = function() {
-    return {
-        name: '',
-        powerTheme: '',
-        creationMethod: '',
-        powers: [],
-        description: '',
-        dateCreated: Date,
-        creator: ''
-    };
+Array.prototype.resize =  function(newSize){
+    while (newSize > this.length){
+        this.push(0);
+    }
+    this.length = newSize;
 };
-    */
 
-app.factory('capeHandlingFactory', function userModel($rootScope){
-    return{
-        singleCape : {},
-        capeList : []
+app.service('capeHandlingFactory', function userModel($rootScope){
+    this.capeList = [];
+    this.setSingleCape = function(cape) {
+        this.capeList[0] = cape;
+        this.capeList.resize(1);
     }
 });

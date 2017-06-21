@@ -5,6 +5,13 @@
 var express = require('express');
 var router = express.Router();
 var CapeController = require('../controllers/cape');
+var onHeaders = require('on-headers');
+
+function scrubETag(res){
+    onHeaders(res, function(){
+        this.removeHeader('Etag');
+    })
+}
 
 var stripFields = function(arguments){
     for(var key in arguments){
@@ -41,6 +48,7 @@ router.get('/id/:capeId', function(req, res, next){
 /* GET Cape/random Listing */
 /* gets a random(?) cape from the Database */
 router.get('/random', function(req, res, next){
+    scrubETag(res);
     CapeController.randomcape(function(err, result){
         if(err){
 
@@ -53,8 +61,10 @@ router.get('/random', function(req, res, next){
 /* GET Cape/search */
 /* Used for Generic Searches*/
 router.get('/search', function(req,res,next){
+    scrubETag(res);
     // Should Strip out unused fields
     var searchCriteria = stripFields(req.query);
+    console.log(searchCriteria);
 
     // Hand to Controller
     CapeController.getCapesByFields(searchCriteria, function(err, result){
@@ -64,6 +74,7 @@ router.get('/search', function(req,res,next){
             if (result.length < 1){
                 res.send({error:"No Cape Found"})
             } else {
+                console.log(result);
                 res.send(result);
             }
         }
@@ -74,23 +85,11 @@ router.get('/search', function(req,res,next){
 /* POST routes */
 /* Default POST Route */
 router.post('/', function(req, res, next){
+    scrubETag(res);
     CapeController.makeCape(req.body.cape, function(err, result){
         if (err){
             //Error Handling
             console.log("Error: POST /cape")
-        } else {
-            res.send(result);
-        }
-    });
-});
-/* POST Cape/id/:capeId */
-/* Used to edit Cape Entries */
-router.post('/id/:capeId', function(req, res, next){
-    var updateInfo = req.body.cape;
-    var id = req.params.capeId;
-    CapeController.editCape(id, updateInfo, function (err, result){
-        if(err){
-            res.send({error: "Error on editing the cape (pre-result)"});
         } else {
             res.send(result);
         }
@@ -101,11 +100,44 @@ router.post('/id/:capeId', function(req, res, next){
 /* Used for Generic Searches
  * expects a JSON object named searchObject */
 router.post('/search', function(req,res,next){
+    scrubETag(res);
     // Strip out unused fields
     var searchCriteria = stripFields(req.body);
     CapeController.getCapesByFields(searchCriteria, function(err, result){
         if (err){
             res.send({error:"No Cape Found"});
+        } else {
+            console.log(result);
+            res.send(result);
+        }
+    })
+});
+
+/* POST Cape/id/:capeId */
+/* Used to edit Cape Entries */
+router.post('/id/:capeId', function(req, res, next){
+    scrubETag(res);
+    var updateInfo = req.body.cape;
+    var id = req.params.capeId;
+    console.log(updateInfo);
+    CapeController.editCape(id, updateInfo, function (err, result){
+        if(err){
+            res.send({error: "Error on editing the cape (pre-result)"});
+        } else {
+            console.log(result);
+            res.send(result);
+        }
+    });
+});
+
+/* Post cape/delete */
+/* Used to delete cape entries. */
+router.post('/delete/:capeId', function(req, res, next){
+    scrubETag(res);
+    var id = req.params.capeId;
+    CapeController.deleteCape(id, function(err, result){
+        if(err){
+
         } else {
             res.send(result);
         }

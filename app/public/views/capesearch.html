@@ -22,7 +22,7 @@
     <div class="col-sm-9">
         <md-lists>
             <md-list-items ng-repeat="item in searchResults">
-                <a href="#capeview">{{item.name}}</a> {{item.creator}}
+                <a href="#capeview/id/{{item._id}}">{{item.name}}</a> {{item.creator}}
             </md-list-items>
         </md-lists>
     </div>
