@@ -20,7 +20,6 @@ router.get('/edit', function (req, res, next){
 /* GET Cape/ID Listing */
 /* Displays a specific cape entry*/
 router.get('/id/:capeId', function(req, res, next){
-    console.log(req.params.capeId);
     CapeController.getCapeById(req.params.capeId, function(err, result){
         if(err){
             res.send({error:"No Cape Found"});
@@ -29,8 +28,8 @@ router.get('/id/:capeId', function(req, res, next){
         }
     });
 });
-
 /* GET Cape/random Listing */
+
 /* gets a random(?) cape from the Database */
 router.get('/random', function(req, res, next){
     var capeList = [];
@@ -43,9 +42,36 @@ router.get('/random', function(req, res, next){
     });
 
 });
+/* GET Cape/search */
+/* Used for Generic Searches*/
 
+router.get('/search', function(req,res,next){
+    var searchCriteria = req.query;
+    // Should verify this is a JSON object
+    // Should Strip out unused fields
+
+    for(var key in searchCriteria){
+        if(searchCriteria[key] === ''){
+            delete searchCriteria[key];
+        }
+    }
+
+    CapeController.getCapesByFields(searchCriteria, function(err, result){
+        if (err){
+            res.send({error:"No Cape Found (cape/search GET getCapesByFields)"});
+        } else {
+            if (result.length < 1){
+                res.send({error:"No Cape Found"})
+            } else {
+                res.send(result);
+            }
+        }
+    });
+
+});
 
 /* POST routes */
+/* Default POST Route */
 router.post('/', function(req, res, next){
     CapeController.makeCape(req.body.cape, function(err, result){
         if (err){
@@ -55,6 +81,28 @@ router.post('/', function(req, res, next){
             res.send(result);
         }
     });
+});
+
+/* POST Cape/search */
+/* Used for Generic Searches
+ * expects a JSON object named searchObject */
+router.post('/search', function(req,res,next){
+    var searchCriteria = req.body;
+    // Should verify this is a JSON object
+    // Should Strip out unused fields
+    for(var key in searchCriteria){
+        if(searchCriteria[key] === ''){
+            delete searchCriteria[key];
+        }
+    }
+    console.log(searchCriteria);
+    CapeController.getCapesByFields(searchCriteria, function(err, result){
+        if (err){
+            res.send({error:"No Cape Found"});
+        } else {
+            res.send(result);
+        }
+    })
 });
 
 
