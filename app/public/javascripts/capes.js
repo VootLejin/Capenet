@@ -3,8 +3,6 @@
  */
 
 'use strict';
-//var app = angular.module('capenet', ['ngRoute', 'ngResource']);
-
 
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.when('/capes', {
@@ -29,7 +27,4 @@ app.controller('capeListingController', function($scope, $http){
             $scope.capeList.push({ 'name': 'There was an error... (capelisting, fetch)'});
         });
     };
-
-
-
 });

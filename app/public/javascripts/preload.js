@@ -3,3 +3,15 @@
  */
 
 var app = angular.module('capenet', ['ngRoute', 'ngResource']);
+
+var cleanCapeModel = function() {
+    return {
+        name: '',
+        powerTheme: '',
+        creationMethod: '',
+        powers: [],
+        description: '',
+        dateCreated: Date,
+        creator: ''
+    };
+};
