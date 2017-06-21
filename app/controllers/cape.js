@@ -5,6 +5,7 @@
 var Cape = require('../models/capemodel');
 
 var CapeController = {
+    /* Create */
     makeCape    : function(capeInfo, callback){
         var myCape = new Cape({});
 
@@ -50,6 +51,8 @@ var CapeController = {
         myCape.save();
         callback(null, myCape);
     },
+
+    /* Read */
     getCapeById : function(capeInfo, callback){
         Cape.findOne({_id : capeInfo},Cape.defaultResults, function(err, cape){
             callback(null, cape);
@@ -72,6 +75,13 @@ var CapeController = {
             }
             callback(null, cb[0]);
         });
+    },
+
+    /* Update */
+    editCape    : function(id, capeInfo, callback){
+        console.log(id);
+        console.log(capeInfo);
+        Cape.update(id, { $set: capeInfo}, callback);
     }
 };
 

@@ -6,6 +6,15 @@ var express = require('express');
 var router = express.Router();
 var CapeController = require('../controllers/cape');
 
+var stripFields = function(arguments){
+    for(var key in arguments){
+        if(arguments[key] === ''){
+            delete arguments[key];
+        }
+    }
+    return arguments;
+};
+
 /* GET Cape Listing */
 /* Shows 5 capes by default */
 router.get('/', function (req, res, next){
@@ -38,7 +47,6 @@ router.get('/random', function(req, res, next){
 
         }
         res.send(result);
-        //res.send(capeList);
     });
 
 });
@@ -46,16 +54,10 @@ router.get('/random', function(req, res, next){
 /* Used for Generic Searches*/
 
 router.get('/search', function(req,res,next){
-    var searchCriteria = req.query;
-    // Should verify this is a JSON object
     // Should Strip out unused fields
+    var searchCriteria = stripFields(req.query);
 
-    for(var key in searchCriteria){
-        if(searchCriteria[key] === ''){
-            delete searchCriteria[key];
-        }
-    }
-
+    // Hand to Controller
     CapeController.getCapesByFields(searchCriteria, function(err, result){
         if (err){
             res.send({error:"No Cape Found (cape/search GET getCapesByFields)"});
@@ -82,20 +84,27 @@ router.post('/', function(req, res, next){
         }
     });
 });
+/* POST Cape/id/:capeId */
+/* Used to edit Cape Entries */
+router.post('/id/:capeId', function(req, res, next){
+    var updateInfo = req.body.cape;
+    var id = req.params.capeId;
+    CapeController.editCape(id, updateInfo, function (err, result){
+        if(err){
+            res.send({error: "Error on editing the cape (pre-result)"});
+        } else {
+            console.log(result);
+            res.send(result);
+        }
+    });
+});
 
 /* POST Cape/search */
 /* Used for Generic Searches
  * expects a JSON object named searchObject */
 router.post('/search', function(req,res,next){
-    var searchCriteria = req.body;
-    // Should verify this is a JSON object
-    // Should Strip out unused fields
-    for(var key in searchCriteria){
-        if(searchCriteria[key] === ''){
-            delete searchCriteria[key];
-        }
-    }
-    console.log(searchCriteria);
+    // Strip out unused fields
+    var searchCriteria = stripFields(req.body);
     CapeController.getCapesByFields(searchCriteria, function(err, result){
         if (err){
             res.send({error:"No Cape Found"});
