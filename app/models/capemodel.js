@@ -24,8 +24,11 @@ var capeSchema = new Mongoose.Schema({
     }
 });
 
+var defaultResults = 'name powerTheme creationMethod powers description dateCreated creator';
+
 capeSchema.plugin(random);
 
 var Cape = myConnection.model('Capecharacters', capeSchema);
 
 module.exports = Cape;
+module.exports.defaultResults = defaultResults;

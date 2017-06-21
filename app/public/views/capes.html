@@ -4,7 +4,7 @@
         <md-list-item ng-repeat="capes in capeList">
             <div class = "row">
                 <div class="col-sm-9">
-                    {{capes.name}}
+                    <a href="/cape/id/{{capes._id}}">{{capes.name}}</a>
                     <div class="row">
                         <div class="col-xs-8 col-sm-6">
                             Theme: {{capes.powerTheme}}
