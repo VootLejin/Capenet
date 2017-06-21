@@ -4,7 +4,7 @@
 
 var app = angular.module('capenet', ['ngRoute', 'ngResource']);
 
-var cleanCapeModel = function() {
+/*var cleanCapeModel = function() {
     return {
         name: '',
         powerTheme: '',
@@ -15,3 +15,11 @@ var cleanCapeModel = function() {
         creator: ''
     };
 };
+    */
+
+app.factory('capeHandlingFactory', function userModel($rootScope){
+    return{
+        singleCape : {},
+        capeList : []
+    }
+});

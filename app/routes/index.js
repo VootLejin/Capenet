@@ -6,8 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('landingpage');
 });
 
+/*
 router.get('/#/', function(req, res, next){
   res.render('landingpage');
 });
+*/
 
 module.exports = router;

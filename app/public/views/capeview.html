@@ -1,0 +1,28 @@
+<div class="container jumbotron">
+    <div class = "row">
+        <div class="col-sm-10">
+            <h1>{{cape.name}}</h1>
+            <div class="row">
+                <div class="col-xs-6 col-sm-4">
+                    <h3> Theme: {{cape.powerTheme}}</h3>
+                </div>
+                <div class="col-xs-4 col-sm-4">
+                    <h3> Creator: {{cape.creator}}</h3>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-9">
+            <md-lists>
+                <h2>
+                    <md-list-items ng-repeat="power in cape.powers">
+                        {{power.classification}} {{power.rating}}
+                    </md-list-items>
+                </h2>
+            </md-lists>
+        </div>
+        <div class="col-sm-9">
+            <p>{{cape.description}}</p>
+        </div>
+    </div>
+</div>
