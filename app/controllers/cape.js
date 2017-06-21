@@ -55,6 +55,11 @@ var CapeController = {
             callback(null, cape);
         })
     },
+    getCapesByFields : function (searchInfo, callback){
+        Cape.find(searchInfo, Cape.defaultResults, function(err, capeList){
+            callback(null,capeList);
+        })
+    },
     randomcape  : function(callback){
         Cape.findRandom().limit(1).exec(function(error, cb){
             if(error){
