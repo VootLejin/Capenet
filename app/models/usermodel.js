@@ -7,7 +7,7 @@ var myConnection = Mongoose.connect('mongodb://localhost/capenet');
 
 var userSchema = new Mongoose.Schema({
 
-    userName: {
+    username: {
         type: String,
         default: 'user'
     },

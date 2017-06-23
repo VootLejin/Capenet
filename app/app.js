@@ -5,11 +5,37 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var capeRouter = require('./routes/capeRouter');
-
 var app = express();
+
+
+// config db?
+var dbConfig = require('./db.js');
+//var mongoose = require('mongoose');
+//mongoose.connect(dbConfig.url);
+
+// configure Passport
+var passport = require('passport');
+var expressSession = require('express-session');
+var secrets = require('./secrets.js'); // This file intentionally not on Git.
+app.use(expressSession(secrets));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// init flash for storing and displaying messages to frontend
+var flash = require('connect-flash');
+app.use(flash());
+
+// initPassport
+var initPassport = require('./passport/init');
+initPassport(passport);
+
+
+var index = require('./routes/index')(passport);
+var userRouter = require('./routes/userRouter')(passport);
+var capeRouter = require('./routes/capeRouter')(passport);
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,7 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', userRouter);
 app.use('/cape', capeRouter);
 
 // catch 404 and forward to error handler
