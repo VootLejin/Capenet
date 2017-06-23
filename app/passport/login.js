@@ -13,14 +13,19 @@ var passportLogin = function(passport) {
         },
         function (req, username, password, done) {
         // Check for User
-            User.findOne({'userName': username},
+            User.findOne({'username': username},
                 function (err, user) {
                     // Error on DB end
                     if (err)
                         return done(err);
                     // User does not exist or Password is wrong
-                    if (!user || !isValidPassword(user, password)) {
+                    if (!user) {
                         console.log('User Not Found with username ' + username);
+                        return done(null, false,
+                            req.flash('message', 'Username and password combo not found'));
+                    }
+                    if(!isValidPassword(user, password)){
+                        console.log('Password doesn\'t match with username ' + username);
                         return done(null, false,
                             req.flash('message', 'Username and password combo not found'));
                     }

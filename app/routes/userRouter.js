@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var isAuthenticated = require('../passport/authentication');
-var makeuser = require('../controllers/makeuser');
 var getusers = require('../controllers/getusers');
 
 var userRoute = function(passport){
-    /* GET users listing. */
+    /* GET user/ listing. */
     router.get('/', function(req, res, next) {
         var userList = { users: [] };
         getusers(userList, function(err, usersArray){
@@ -20,34 +19,68 @@ var userRoute = function(passport){
         });
 
     });
+
+    /* GET user/home  */
     router.get('/home', isAuthenticated, function(req, res){
-        res.render('home', {user: req.user});
+        console.log('going to /home');
+        console.log('User is logged in');
+        res.send({user: req.user.username});
     });
 
     /* User Session handling */
     /* logging in */
+    /* POST user/login  */
     router.post('/login', passport.authenticate('login',{
         successRedirect :'/user/home',
-        failureRedirect : '/',
+        failureRedirect : '/user/login-fail',
         failureFlash : true
     }));
+
+    /* GET user/login-fail */
+    router.get('/login-fail', function(req, res){
+        console.log('login-failed');
+        console.log(req.user);
+        res.send({user: 'failed to log in', users: req.user});
+    });
+
+    /* GET user/logout  */
     /* logging out */
     router.get('/logout', function(req, res){
         req.logout();
         res.redirect('/');
     });
     /* Signing up */
+    /* GET user/signup  */
     /* view */
-    router.get('/', function(req, res){
-        res.render('signup', {message : req.flash('message')});
-    });
+    router.get('/signup', function(req, res){
+        res.send({message : req.flash('message')});
+});
 
     /* submission */
+
     router.post('/signup', passport.authenticate('signup', {
-        successRedirect: '/',
-        failureRedirect: '/user/signup',
+        successRedirect: '/user/signup-success',
+        failureRedirect: '/user/signup-fail',
         failureFlash : true
     }));
+
+
+    /*
+    router.post('/signup', function(req, res){
+       console.log(req.body);
+       res.send({message: "some message"});
+    });
+    */
+
+    router.get('/signup-success', function(req, res){
+        console.log("Successful Signup");
+       res.send({message: "Signup Succeeded"});
+    });
+
+    router.get('/signup-fail', function(req, res){
+        console.log("Failed Signup");
+        res.send({message: "Signup Failed"});
+    });
 
 
     return router;

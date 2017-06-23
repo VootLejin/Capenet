@@ -41,6 +41,7 @@ var capeRoute = function(passport) {
             if (err) {
                 res.send({error: "No Cape Found"});
             } else {
+                console.log(req.user);
                 res.send(result);
             }
         });

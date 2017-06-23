@@ -6,13 +6,8 @@ var index = function(passport){
   /* GET home page. */
     router.get('/', function(req, res, next) {
         res.render('landingpage');
+
     });
-
-
-
-    router.post('/signup', passport.authenticate('signup', {
-
-    }))
 
     return router;
 };

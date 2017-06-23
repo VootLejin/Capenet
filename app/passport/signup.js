@@ -12,6 +12,7 @@ var passportSignup = function(passport){
         },
         function(req, username, password, done){
             findOrCreateUser = function(){
+                console.log("inside Find or Create User");
                 User.findOne({'username' : username}, function (err, user){
                     if (err){
                         console.log('Error in Signup');
@@ -44,7 +45,8 @@ var passportSignup = function(passport){
                     }
 
                 });
-            }
+            };
+            process.nextTick(findOrCreateUser);
         }
     ));
 

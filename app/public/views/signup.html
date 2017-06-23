@@ -1,0 +1,21 @@
+<div class = "container">
+    <div class = "row">
+        <h1 class = "text-center login-title">
+            Sign-Up
+        </h1>
+        <div class = "account-wall">
+            <form class = "Form-signin">
+                <input type = "text"
+                       placeholder="username"
+                       id="username"
+                        ng-model="username">
+                <input type = "password"
+                       placeholder="password"
+                       id = "password"
+                        ng-model = "password">
+                <input type="submit" ng-click="signup(username, password)" value = "Sign up" />
+            </form>
+        </div>
+        <p>{{message}}</p>
+    </div>
+</div>
