@@ -17,3 +17,29 @@ app.service('capeHandlingFactory', function userModel($rootScope){
         this.capeList.resize(1);
     }
 });
+
+app.run(function($rootScope, $http){
+    $rootScope.username = "Not Signed in";
+    $http.get('/sessioninfo')
+        .then(function success(response){
+            console.log(response);
+            if(response.data.username){
+                $rootScope.username = response.data.username;
+            }
+        })
+    ;
+    $rootScope.logout = function(){
+        $http.get('/user/logout').then(
+            function success(response){
+                if(response.data){
+                    if(response.data._status === 'success'){
+                        $rootScope.username = "Not Signed in";
+                    }
+                }
+            },
+            function failure(response){
+                console.log(response);
+            }
+        );
+    }
+});

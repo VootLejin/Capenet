@@ -14,7 +14,7 @@ app.config(['$routeProvider', function($routeProvider){
     });
 }]);
 
-app.controller('userSignInController', function($scope, $http){
+app.controller('userSignInController', function($scope, $http, $rootScope){
     $scope.signin = function(username, password){
         var data = {
             username: username,
@@ -22,19 +22,16 @@ app.controller('userSignInController', function($scope, $http){
         };
         $http.post('/user/login', data)
             .then(function success(response){
-                $scope.message = "Successful Response";
-                console.log(response);
+                $scope.message = "Signed in as " + response.data.user;
+                $rootScope.username = response.data.user;
             }, function failure(response){
-                $scope.message = "Failure Response";
-                console.log(response);
+                $scope.message = "Failed to Sign in!";
             });
     };
 });
 
-app.controller('userSignUpController', function($scope, $http){
+app.controller('userSignUpController', function($scope, $http, $rootScope){
     $scope.signup = function(username, password){
-        console.log(username);
-        console.log(password);
         var data = {
             username: username,
             password: password
@@ -42,8 +39,12 @@ app.controller('userSignUpController', function($scope, $http){
 
         $http.post('/user/signup', data)
             .then(function success(response){
-                $scope.message = "Successful Response";
-                console.log(response);
+                if(response.data.user){
+                    $rootScope.username = response.data.user;
+                } else {
+                    $scope.message = "Failed to sign up";
+                }
+
             }, function failure(response){
                 $scope.message = "Failure Response";
                 console.log(response);

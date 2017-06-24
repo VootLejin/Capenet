@@ -47,7 +47,7 @@ var userRoute = function(passport){
     /* logging out */
     router.get('/logout', function(req, res){
         req.logout();
-        res.redirect('/');
+        res.send({_status:'success'});
     });
     /* Signing up */
     /* GET user/signup  */
