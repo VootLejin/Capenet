@@ -1,12 +1,12 @@
 <div class = "container">
-    <form>
 
+    <form>
         <div ng-include= "'views/pieces/capename.html'"></div>
         <div ng-include= "'views/pieces/capetheme.html'"></div>
         <div ng-include= "'views/pieces/powerselection.html'"></div>
         <div ng-include= "'views/pieces/capepowerdescription.html'"></div>
-
     </form>
+
     <p>Points Remaining: {{points}}</p>
     <p>Classes rolled: {{numClasses}}</p>
     <input type="submit" ng-click="submit()" value = "Save" />

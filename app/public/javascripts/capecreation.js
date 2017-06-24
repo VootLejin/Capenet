@@ -15,9 +15,11 @@ app.controller('capeCreationController', function($scope, $http){
     $scope.defaultClasses = ['Mover', 'Shaker', 'Brute', 'Breaker',
         'Master', 'Tinker', 'Blaster', 'Thinker',
         'Striker', 'Changer', 'Trump', 'Stranger'];
-    $scope.powers = [{classification: 'Mover', rating: 0}];
+
     $scope.basePoints = 0;
     $scope.points = 0;
+    $scope.cape = {};
+    $scope.cape.powers = [{classification: 'Mover', rating: 0}];
 
     $scope.lazyInit = function(){
         $scope.name = "Fat Man";
@@ -26,10 +28,10 @@ app.controller('capeCreationController', function($scope, $http){
 
     $scope.submit = function(){
         var capeInfo = {cape:{
-            name: $scope.name,
-            description: $scope.description,
-            powers: $scope.powers,
-            powerTheme: $scope.powerTheme}};
+            name: $scope.cape.name,
+            description: $scope.cape.description,
+            powers: $scope.cape.powers,
+            powerTheme: $scope.cape.powerTheme}};
         $http.post("/cape", capeInfo)
             .then(function success(response){
                 // Check for success
@@ -43,7 +45,7 @@ app.controller('capeCreationController', function($scope, $http){
     };
 
     $scope.addPowerClass = function(){
-        $scope.powers.push({classification: 'Mover', rating: 0});
+        $scope.cape.powers.push({classification: 'Mover', rating: 0});
     };
 
     $scope.randomPower = function(){
@@ -56,24 +58,26 @@ app.controller('capeCreationController', function($scope, $http){
         }
         $scope.numClasses = numClasses;
         // get random classes
-        $scope.powers=[];
+        $scope.cape.powers=[];
         var classID =0;
+        var availableClasses = $scope.defaultClasses.slice();
         for(var i = 0; i < numClasses; i++){
             //console.log("Adding power Class");
             $scope.addPowerClass();
             //console.log("Picking Class...");
-            classID = Math.floor(Math.random() * $scope.defaultClasses.length);
+            classID = Math.floor(Math.random() * availableClasses.length);
             //console.log("Adding Class: " + classID);
             //console.log($scope.defaultClasses[classID]);
-            $scope.powers[i] = {classification: $scope.defaultClasses[classID], rating: 0};
+            $scope.cape.powers[i] = {classification: availableClasses[classID], rating: 0};
+            availableClasses.splice(classID, 1);
         }
 
     };
 
     $scope.removePower = function(power){
-        var index = $scope.powers.indexOf(power);
+        var index = $scope.cape.powers.indexOf(power);
         if (index > -1){
-            $scope.powers.splice(index,1);
+            $scope.cape.powers.splice(index,1);
         };
     };
 

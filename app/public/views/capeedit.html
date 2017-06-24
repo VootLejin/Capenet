@@ -1,60 +1,11 @@
 <div class = "container">
     <form>
-        <div class="form-group">
-            <label for="cape-name">Name</label>
-            <input class="form-control"
-                   type="text"
-                   id= "cape-name"
-                   placeholder="Name"
-                   ng-model="cape.name">
-        </div>
-        <div class = "form-group">
-            <label for="cape-theme">Power/Shard Theme</label>
-            <input class="form-control"
-                   type="text"
-                   id="cape-theme"
-                   placeholder="Theme"
-                   ng-model ="cape.powerTheme">
-        </div>
-
-        <!-- Time to figure out how to make the power Entry stuff work -->
-        <div class="form-group">
-            <label for="cape-classes">Classifications</label>
-            <div id="cape-classes">
-                <input type="submit" ng-click="addPowerClass()" value = "Add additional Rating"/>
-                <md-lists>
-                    <md-list-items ng-repeat="item in cape.powers">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <select ng-model="item.classification" class="form-control">
-                                    <option ng-repeat="power in defaultClasses">{{power}}</option>
-                                </select>
-                            </div>
-                            <div class="col-xs-2">
-                                <input type="number"
-                                       id="class-power-level"
-                                       min="-3" max="13" step="1" value="0"
-                                       ng-model="item.rating"
-                                       class="form-control">
-                            </div>
-                            <div class="col-xs-2">
-                                <button ng-click="removePower(item)">-</button>
-                            </div>
-                        </div>
-                    </md-list-items>
-                </md-lists>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="cape-desc">Power Description</label>
-            <textarea class ="form-control"
-                      id="cape-desc"
-                      rows="5"
-                      ng-model="cape.description"></textarea>
-        </div>
-
+        <div ng-include= "'views/pieces/capename.html'"></div>
+        <div ng-include= "'views/pieces/capetheme.html'"></div>
+        <div ng-include= "'views/pieces/powerselection.html'"></div>
+        <div ng-include= "'views/pieces/capepowerdescription.html'"></div>
     </form>
+
     <input type="submit" ng-click="submit()" value = "Save" />
     <div id="delete-div">
         <input type="submit" ng-click="verifyDelete()" value = "Delete this Cape"/>
