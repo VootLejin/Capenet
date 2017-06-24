@@ -126,12 +126,23 @@ var capeRoute = function(passport) {
             scrubETag(res);
             var updateInfo = req.body.cape;
             var id = req.params.capeId;
-            CapeController.editCape(id, updateInfo, function (err, result) {
+            CapeController.editCape(id, updateInfo, req.user.username, function (err, result) {
                 if (err) {
                     res.send({error: "Error on editing the cape (pre-result)"});
                 } else {
-                    console.log(result);
-                    res.send(result);
+                    // check if anything was edited:
+                    var reply = {};
+                    if(result.nModified > 0){
+                        reply = {
+                            _status : 'success'
+                        }
+                    } else {
+                        reply = {
+                            _status : 'failure',
+                            _reason : 'no entries modified (You might not own the Cape)'
+                        }
+                    }
+                    res.send(reply);
                 }
             });
         } else {
