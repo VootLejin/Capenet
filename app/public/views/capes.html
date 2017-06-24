@@ -1,5 +1,4 @@
-<input type="submit" ng-click="fetch()" value = "Another one!" />
-<div class="container">
+<div class="container" ng-init="loadCapeList()">
     <md-list>
         <md-list-item ng-repeat="capes in capeList">
             <div class = "row">

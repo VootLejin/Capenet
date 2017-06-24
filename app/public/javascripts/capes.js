@@ -28,4 +28,11 @@ app.controller('capeListingController', function($scope, $http, capeHandlingFact
             $scope.capeList.push({ 'name': 'There was an error... (capelisting, fetch)'});
         });
     };
+
+    $scope.loadCapeList = function(){
+        $http.get('cape').then(function success(response){
+            console.log(response.data);
+            $scope.capeList = response.data;
+        })
+    }
 });

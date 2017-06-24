@@ -65,6 +65,20 @@ var CapeController = {
                 callback(null,capeList);
         });
     },
+    getCapesByRecent : function (startingSpot, callback) {
+        var start = 0;
+        if (startingSpot) {
+            start = startingSpot;
+        }
+        Cape.find({})
+            .skip(start)
+            .limit(10)
+            .sort({dateCreated: -1})
+            .exec(function (err, capeList) {
+                callback(null, capeList);
+            });
+    },
+
     randomcape  : function(callback){
         Cape.findRandom().limit(1).exec(function(error, cb){
             if(error){
