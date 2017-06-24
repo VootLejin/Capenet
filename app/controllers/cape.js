@@ -6,18 +6,15 @@ var Cape = require('../models/capemodel');
 
 var CapeController = {
     /* Create */
-    makeCape    : function(capeInfo, callback){
+    makeCape    : function(capeInfo,user, callback){
         var myCape = new Cape({});
 
         //set dateCreated
         myCape.dateCreated = Date.now();
 
         //set creator
-        if(capeInfo.creator){
-            myCape.creator = capeInfo.creator;
-        } else {
-            myCape.creator = 'admin';
-        }
+        myCape.creator = user;
+
 
         //set name
         if(capeInfo.name){

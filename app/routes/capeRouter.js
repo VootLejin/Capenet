@@ -6,6 +6,7 @@ var express = require('express');
 var router = express.Router();
 var CapeController = require('../controllers/cape');
 var onHeaders = require('on-headers');
+var isAuthenticated = require('../passport/authentication');
 
 var capeRoute = function(passport) {
     function scrubETag(res) {
@@ -29,10 +30,6 @@ var capeRoute = function(passport) {
         res.render('capelisting');
     });
 
-    /* GET Cape Edit */
-    router.get('/edit', function (req, res, next) {
-        res.render('capeedit');
-    });
 
     /* GET Cape/ID Listing */
     /* Displays a specific cape entry*/
@@ -86,15 +83,23 @@ var capeRoute = function(passport) {
     /* POST routes */
     /* Default POST Route */
     router.post('/', function (req, res, next) {
-        scrubETag(res);
-        CapeController.makeCape(req.body.cape, function (err, result) {
-            if (err) {
-                //Error Handling
-                console.log("Error: POST /cape")
-            } else {
-                res.send(result);
-            }
-        });
+        if(req.isAuthenticated()){
+            scrubETag(res);
+            CapeController.makeCape(req.body.cape, req.user.username, function (err, result) {
+                if (err) {
+                    //Error Handling
+                    console.log("Error: POST /cape")
+                } else {
+                    var reply = {
+                        _status : 'success',
+                        _cape   : result
+                    };
+                    res.send(reply);
+                }
+            });
+        } else {
+            res.send({_status: 'failure', _reason : 'not authenticated'})
+        };
     });
 
     /* POST Cape/search */
@@ -117,17 +122,21 @@ var capeRoute = function(passport) {
     /* POST Cape/id/:capeId */
     /* Used to edit Cape Entries */
     router.post('/id/:capeId', function (req, res, next) {
-        scrubETag(res);
-        var updateInfo = req.body.cape;
-        var id = req.params.capeId;
-        CapeController.editCape(id, updateInfo, function (err, result) {
-            if (err) {
-                res.send({error: "Error on editing the cape (pre-result)"});
-            } else {
-                console.log(result);
-                res.send(result);
-            }
-        });
+        if(req.isAuthenticated()) {
+            scrubETag(res);
+            var updateInfo = req.body.cape;
+            var id = req.params.capeId;
+            CapeController.editCape(id, updateInfo, function (err, result) {
+                if (err) {
+                    res.send({error: "Error on editing the cape (pre-result)"});
+                } else {
+                    console.log(result);
+                    res.send(result);
+                }
+            });
+        } else {
+            console.log('Editing Failed on Authenticate');
+        }
     });
 
     /* Post cape/delete */

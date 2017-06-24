@@ -10,6 +10,13 @@ Array.prototype.resize =  function(newSize){
     this.length = newSize;
 };
 
+var actionSucceded = function(reply){
+  return reply.data._status ==='success';
+};
+var actionReason = function(reply){
+    return reply.data._reason;
+};
+
 app.service('capeHandlingFactory', function userModel($rootScope){
     this.capeList = [];
     this.setSingleCape = function(cape) {

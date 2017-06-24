@@ -28,11 +28,16 @@ app.controller('capeEditController', function($scope, $http, capeHandlingFactory
             name: $scope.cape.name,
             description: $scope.cape.description,
             powers: $scope.cape.powers,
-            powerTheme: $scope.cape.powerTheme,
-            creator: $scope.cape.creator}};
+            powerTheme: $scope.cape.powerTheme}};
         $http.post("/cape/id/" + $scope.cape._id, capeInfo)
             .then(function success(response){
-                $scope.creator = response.data.creator;
+                // Check for success
+                if (actionSucceded(response)){
+                    $scope.creator = response.data.creator;
+                    $scope.message = 'Cape edited!';
+                } else {
+                    $scope.message = 'There was an error: ' + actionReason(response);
+                }
             });
     };
 

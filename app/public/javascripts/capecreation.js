@@ -32,7 +32,13 @@ app.controller('capeCreationController', function($scope, $http){
             powerTheme: $scope.powerTheme}};
         $http.post("/cape", capeInfo)
             .then(function success(response){
-                $scope.creator = response.data.creator;
+                // Check for success
+                if (actionSucceded(response)){
+                    $scope.creator = response.data._cape.creator;
+                    $scope.message = 'Cape made!';
+                } else {
+                    $scope.message = 'There was an error: ' + actionReason(response);
+                }
             });
     };
 
