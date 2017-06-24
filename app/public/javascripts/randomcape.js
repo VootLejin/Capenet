@@ -11,9 +11,9 @@ app.config(['$routeProvider', function($routeProvider){
 
 }]);
 
-app.controller('randomCapeController', function($scope, $http){
+app.controller('randomCapeController', function($scope, $http, capeHandlingFactory){
     // initializers
-    $scope.capes = {};
+    $scope.cape = {};
     $scope.message = "Cape Listing page!";
 
     //functions
@@ -21,9 +21,11 @@ app.controller('randomCapeController', function($scope, $http){
     $scope.fetch = function(callback){
         // Go to /random, get an entry.
         $http.get('cape/random').then(function success(response){
-            $scope.capes= response.data;
+            capeHandlingFactory.setSingleCape(response.data);
+            $scope.cape= capeHandlingFactory.getSingleCape();
+
         }, function failure(response){
-            $scope.capes= { 'name': 'There was an error... (capelisting, fetch)'};
+            $scope.cape= { 'name': 'There was an error... (capelisting, fetch)'};
         });
     };
 

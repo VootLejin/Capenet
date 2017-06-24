@@ -21,7 +21,7 @@ app.controller('capeEditController', function($scope, $http, capeHandlingFactory
     $scope.points = 0;
     $scope.deleteCount = 0;
 
-    $scope.cape = capeHandlingFactory.capeList[0];
+    $scope.cape = capeHandlingFactory.getSingleCape();
 
     $scope.submit = function(){
         var capeInfo = {cape:{

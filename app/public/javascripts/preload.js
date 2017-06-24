@@ -22,6 +22,9 @@ app.service('capeHandlingFactory', function userModel($rootScope){
     this.setSingleCape = function(cape) {
         this.capeList[0] = cape;
         this.capeList.resize(1);
+    };
+    this.getSingleCape = function(){
+        return this.capeList[0];
     }
 });
 
