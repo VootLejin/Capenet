@@ -4,8 +4,8 @@
 
 var Mongoose = require('mongoose');
 var dbUrl = require('../db.js').url;
-var auth = require('../db.js').auth;
-var myConnection = Mongoose.connect(dbUrl, auth);
+var opts = require('../db.js').opts;
+var myConnection = Mongoose.connect(dbUrl, opts);
 
 var userSchema = new Mongoose.Schema({
 
