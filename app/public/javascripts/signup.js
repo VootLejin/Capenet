@@ -10,6 +10,7 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('userSignUpController', function($scope, $http){
+    $scope.username = '';
     $scope.signup = function(username, password){
         var data = {
             username: username,
@@ -19,6 +20,8 @@ app.controller('userSignUpController', function($scope, $http){
             .then(function success(response){
                 $scope.message = "Successful Response";
                 console.log(response);
+                $scope. username ='';
+                $scope.password = '';
             }, function failure(response){
                 $scope.message = "Failure Response";
                 console.log(response);
