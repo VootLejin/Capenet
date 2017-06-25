@@ -8,12 +8,12 @@
                 <input type = "text"
                        placeholder="username"
                        id="username"
-                        ng-model="username">
+                        ng-model="newuser">
                 <input type = "password"
                        placeholder="password"
                        id = "password"
                         ng-model = "password">
-                <input type="submit" ng-click="signup(username, password)" value = "Sign up" />
+                <input type="submit" ng-click="signup(newuser, password)" value = "Sign up" />
             </form>
         </div>
         <p>{{message}}</p>

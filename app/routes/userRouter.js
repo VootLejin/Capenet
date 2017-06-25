@@ -63,12 +63,12 @@ var userRoute = function(passport){
 
     router.get('/signup-success', function(req, res){
         console.log("Successful Signup");
-       res.send({message: "Signup Succeeded"});
+       res.send({_status: 'success', user: req.user.username});
     });
 
     router.get('/signup-fail', function(req, res){
         console.log("Failed Signup");
-        res.send({message: "Signup Failed"});
+        res.send({_status: 'failure', _reason: 'signup failure'});
     });
 
 

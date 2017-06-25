@@ -39,15 +39,19 @@ app.controller('userSignUpController', function($scope, $http, $rootScope){
 
         $http.post('/user/signup', data)
             .then(function success(response){
-                if(response.data.user){
+                if(response.data._status ==="success"){
                     $rootScope.username = response.data.user;
+                    $scope.message = "Sign-up Succeeded. Welcome, " + $rootScope.username + "!";
                 } else {
                     $scope.message = "Failed to sign up";
                 }
+                $scope.newuser = '';
+                $scope.password = '';
 
             }, function failure(response){
-                $scope.message = "Failure Response";
-                console.log(response);
-            });
+                $scope.message = "Failed to signup (Failure Response)";
+                $scope.newuser = '';
+                $scope.password = '';
+            })
     };
 });
