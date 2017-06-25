@@ -37,7 +37,7 @@ var userRoute = function(passport){
 
     /* GET user/login-fail */
     router.get('/login-fail', function(req, res){
-        res.send({user: 'failed to log in', users: req.user});
+        res.send({_status: 'failure', _reason: 'Failed to log in'});
     });
 
     /* GET user/logout  */

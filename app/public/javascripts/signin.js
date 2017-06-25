@@ -22,8 +22,12 @@ app.controller('userSignInController', function($scope, $http, $rootScope){
         };
         $http.post('/user/login', data)
             .then(function success(response){
-                $scope.message = "Signed in as " + response.data.user;
-                $rootScope.username = response.data.user;
+                if(response.data._status ==="success") {
+                    $scope.message = "Signed in as " + response.data.user;
+                    $rootScope.username = response.data.user;
+                } else {
+                    $scope.message = "Failed to Sign in!";
+                }
             }, function failure(response){
                 $scope.message = "Failed to Sign in!";
             });
