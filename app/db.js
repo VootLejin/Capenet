@@ -5,5 +5,6 @@
 module.exports ={
     // example other url:
     // 'url' : 'mongodb://<dbuser>:<dbpassword>@novus.modulusmongo.net:27017/<dbName>'
-    'url' : 'mongodb://localhost/passport'
+    'url' : 'mongodb://localhost/capenet',
+    'auth': {authdb: "admin"}
 };
