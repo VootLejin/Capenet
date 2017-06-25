@@ -4,7 +4,8 @@
 
 var Mongoose = require('mongoose');
 var random = require('mongoose-random');
-var myConnection = Mongoose.connect('mongodb://localhost/capenet');
+var dbUrl = require('../db').url;
+var myConnection = Mongoose.connect(dbUrl);
 
 var capeSchema = new Mongoose.Schema({
     name: {
