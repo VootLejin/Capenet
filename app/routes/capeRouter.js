@@ -31,7 +31,6 @@ var capeRoute = function(passport) {
            if(err){
                res.send({_status:'failure', _reason:'Failed at capes/ getCapesByRecent'});
            } else {
-               console.log(result);
                res.send(result);
            }
         });
@@ -45,7 +44,6 @@ var capeRoute = function(passport) {
             if (err) {
                 res.send({error: "No Cape Found"});
             } else {
-                console.log(req.user);
                 res.send(result);
             }
         });
@@ -79,7 +77,6 @@ var capeRoute = function(passport) {
                 if (result.length < 1) {
                     res.send({error: "No Cape Found"})
                 } else {
-                    console.log(result);
                     res.send(result);
                 }
             }
@@ -120,7 +117,6 @@ var capeRoute = function(passport) {
             if (err) {
                 res.send({error: "No Cape Found"});
             } else {
-                console.log(result);
                 res.send(result);
             }
         })
@@ -153,7 +149,10 @@ var capeRoute = function(passport) {
                 }
             });
         } else {
-            console.log('Editing Failed on Authenticate');
+            res.send({
+                _status : 'failure',
+                _reason : 'no entries modified (You are not signed in)'
+            });
         }
     });
 
@@ -164,7 +163,7 @@ var capeRoute = function(passport) {
         scrubETag(res);
         var id = req.params.capeId;
         console.log("Deleting Cape, Id: " + id);
-        CapeController.deleteCape(id, function (err, result) {
+        CapeController.deleteCape(id, req.user.username, function (err, result) {
             if (err) {
 
             } else {
@@ -175,7 +174,7 @@ var capeRoute = function(passport) {
 
 
     return router;
-}
+};
 
 
 

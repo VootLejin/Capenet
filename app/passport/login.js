@@ -20,12 +20,10 @@ var passportLogin = function(passport) {
                         return done(err);
                     // User does not exist or Password is wrong
                     if (!user) {
-                        console.log('User Not Found with username ' + username);
                         return done(null, false,
                             req.flash('message', 'Username and password combo not found'));
                     }
                     if(!isValidPassword(user, password)){
-                        console.log('Password doesn\'t match with username ' + username);
                         return done(null, false,
                             req.flash('message', 'Username and password combo not found'));
                     }

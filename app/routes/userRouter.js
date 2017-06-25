@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var isAuthenticated = require('../passport/authentication');
-var getusers = require('../controllers/getusers');
 
 var userRoute = function(passport){
     /* GET user/ listing. */
+    /*
     router.get('/', function(req, res, next) {
         var userList = { users: [] };
         getusers(userList, function(err, usersArray){
@@ -19,11 +19,10 @@ var userRoute = function(passport){
         });
 
     });
+    */
 
     /* GET user/home  */
     router.get('/home', isAuthenticated, function(req, res){
-        console.log('going to /home');
-        console.log('User is logged in');
         res.send({user: req.user.username});
     });
 
@@ -38,8 +37,6 @@ var userRoute = function(passport){
 
     /* GET user/login-fail */
     router.get('/login-fail', function(req, res){
-        console.log('login-failed');
-        console.log(req.user);
         res.send({user: 'failed to log in', users: req.user});
     });
 
@@ -63,14 +60,6 @@ var userRoute = function(passport){
         failureRedirect: '/user/signup-fail',
         failureFlash : true
     }));
-
-
-    /*
-    router.post('/signup', function(req, res){
-       console.log(req.body);
-       res.send({message: "some message"});
-    });
-    */
 
     router.get('/signup-success', function(req, res){
         console.log("Successful Signup");

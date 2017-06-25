@@ -94,8 +94,8 @@ var CapeController = {
     },
 
     /* Delete */
-    deleteCape  : function(id, callback){
-        Cape.remove({_id: id}, callback);
+    deleteCape  : function(id, user, callback){
+        Cape.remove({_id: id, creator:user}, callback);
     }
 };
 
