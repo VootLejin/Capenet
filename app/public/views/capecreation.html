@@ -10,8 +10,7 @@
     <p>Points Remaining: {{points}}</p>
     <p>Classes rolled: {{numClasses}}</p>
     <input type="submit" ng-click="submit()" value = "Save" />
-    <input type="submit" ng-click="lazyInit()" value = "Lazy Init (Remove)"/>
-
+    <div ng-include="'views/pieces/poweradd.html'"></div>
     <input type="submit" ng-click="randomPower()" value = "Random Power" />
     <p>{{message}}</p>
 </div>
