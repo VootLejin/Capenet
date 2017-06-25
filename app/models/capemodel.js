@@ -4,8 +4,8 @@
 
 var Mongoose = require('mongoose');
 var random = require('mongoose-random');
-var dbUrl = require('../db').url;
-var auth = require('../db').auth;
+var dbUrl = require('../db.js').url;
+var auth = require('../db.js').auth;
 var myConnection = Mongoose.connect(dbUrl, auth);
 
 var capeSchema = new Mongoose.Schema({
