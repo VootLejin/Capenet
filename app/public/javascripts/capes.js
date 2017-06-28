@@ -31,7 +31,6 @@ app.controller('capeListingController', function($scope, $http, capeHandlingFact
 
     $scope.loadCapeList = function(){
         $http.get('cape').then(function success(response){
-            console.log(response);
             console.log(response.data);
             $scope.capeList = response.data;
         })
