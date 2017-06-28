@@ -23,7 +23,7 @@ var userRoute = function(passport){
 
     /* GET user/home  */
     router.get('/home', isAuthenticated, function(req, res){
-        res.send({user: req.user.username});
+        res.send({_status: 'success', user: req.user.username});
     });
 
     /* User Session handling */

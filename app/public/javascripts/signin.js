@@ -22,7 +22,7 @@ app.controller('userSignInController', function($scope, $http, $rootScope){
         };
         $http.post('/user/login', data)
             .then(function success(response){
-                if(response.data._status ==="success") {
+                if(response.data._status ==='success') {
                     $scope.message = "Signed in as " + response.data.user;
                     $rootScope.username = response.data.user;
                 } else {
