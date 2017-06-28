@@ -26,7 +26,7 @@ var passportSignup = function(passport){
                     // User already exists
                     if (user){
                         console.log('User already Exists, username: ' + username);
-                        return done(null, false, req.flash('message', 'user already exists'));
+                        return done(null, false, req.flash('message', 'User already exists'));
                     } else {
                         // No User yet.
                         var newUser = new User();

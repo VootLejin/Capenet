@@ -47,7 +47,8 @@ app.controller('userSignUpController', function($scope, $http, $rootScope){
                     $rootScope.username = response.data.user;
                     $scope.message = "Sign-up Succeeded. Welcome, " + $rootScope.username + "!";
                 } else {
-                    $scope.message = "Failed to sign up";
+                    console.log(response.data);
+                    $scope.message = "Failed to sign up: "+ response.data._reason;
                 }
                 $scope.newuser = '';
                 $scope.password = '';
