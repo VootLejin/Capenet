@@ -12,6 +12,11 @@ var passportSignup = function(passport){
         },
         function(req, username, password, done){
             findOrCreateUser = function(){
+                // Validate the Name Length
+                if (username.length > 24){
+                    console.log('username too long: ' + username.length);
+                    return done(null, false, req.flash('message', 'Name too long'));
+                }
                 User.findOne({'username' : username}, function (err, user){
                     if (err){
                         console.log('Error in Signup');
