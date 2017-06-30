@@ -3,6 +3,8 @@
  */
 
 var Cape = require('../models/capemodel');
+// Because we have to update the user on edits and creation
+var User = require('../models/usermodel');
 
 var CapeController = {
     /* Create */
@@ -50,7 +52,19 @@ var CapeController = {
         } else {
             myCape.powers[0] = {'classification' : 'Thinker', 'rating' : 0};
         }
-        myCape.save();
+        myCape.save(function(err, savedCape, numEffected){
+            console.log('cape creation save callback');
+            if (err)
+                callback(err);
+            // Now update user
+            User.updateLastSubmission(user, savedCape._id, function(err){
+                console.log('cape creation userUpdate callback');
+                if (err){
+                    callback(err);
+                }
+            })
+        });
+
         callback(null, myCape);
     },
 
