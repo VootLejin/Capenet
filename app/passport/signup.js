@@ -17,6 +17,10 @@ var passportSignup = function(passport){
                     console.log('username too long: ' + username.length);
                     return done(null, false, req.flash('message', 'Name too long'));
                 }
+                if (password.length < 4){
+                    console.log('Password too short');
+                    return done(null, false, req.flash('message', 'Password too short'));
+                }
                 User.findOne({'username' : username}, function (err, user){
                     if (err){
                         console.log('Error in Signup');
