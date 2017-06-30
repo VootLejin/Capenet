@@ -18,7 +18,12 @@ var CapeController = {
 
         //set name
         if(capeInfo.name){
-            myCape.name = capeInfo.name;
+            if(capeInfo.name.length > 32){
+                myCape.name = 'unnamed'
+            } else {
+                myCape.name = capeInfo.name;
+            }
+
         } else {
             // To Do, some sort of auto increment for unnamed cases
             myCape.name = 'unnamed';
