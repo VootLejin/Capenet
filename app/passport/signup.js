@@ -14,8 +14,10 @@ var passportSignup = function(passport){
             findOrCreateUser = function(){
                 // Validate the Name Length
                 if (username.length > 24){
-                    console.log('username too long: ' + username.length);
-                    return done(null, false, req.flash('message', 'Name too long'));
+                    return done(null, false, req.flash('message', 'Name too long (must be fewer then 24 characters)'));
+                }
+                if (username.length < 4){
+                    return done(null, false, req.flash('message', 'Name too long (must be longer then 3 characters)'));
                 }
                 if (password.length < 4){
                     console.log('Password too short');
