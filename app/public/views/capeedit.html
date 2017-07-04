@@ -7,7 +7,14 @@
     </form>
 
     <div ng-include="'views/pieces/poweradd.html'"></div>
-    <input type="submit" ng-click="submit()" value = "Save" />
+    <div class="row">
+        <div class="col-sm-4 ">
+            <input type="submit" ng-click="submit()" value = "Save" />
+        </div>
+        <div class ="col-sm-4 ">
+            <p>{{message}}</p>
+        </div>
+    </div>
     <div id="delete-div">
         <input type="submit" ng-click="verifyDelete()" value = "Delete this Cape"/>
     </div>
