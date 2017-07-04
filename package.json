@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "start": "node ./app/bin/www",
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "launch":"forever node ./app/bin/www"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.17.1",
+    "bson": "^1.0.4",
     "chai": "^4.0.2",
     "chai-http": "^3.0.0",
     "connect-flash": "^0.1.1",
@@ -17,15 +19,19 @@
     "ejs": "~2.5.6",
     "express": "~4.15.2",
     "express-session": "^1.15.3",
+    "kareem": "^1.4.1",
     "mocha": "^3.4.2",
     "mongoose": "^4.10.8",
     "mongoose-random": "^0.1.1",
     "morgan": "~1.8.1",
+    "mpath": "^0.3.0",
     "on-headers": "^1.0.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "regexp-clone": "0.0.1",
     "request": "^2.81.0",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "sliced": "^1.0.1"
   },
   "description": "host a super power rating website",
   "main": "app.js",
