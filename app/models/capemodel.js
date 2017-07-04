@@ -8,6 +8,8 @@ var dbUrl = require('../db.js').url;
 var opts = require('../db.js').opts;
 var myConnection = Mongoose.connect(dbUrl, opts);
 
+var defaultResults = 'name powerTheme creationMethod powers description dateCreated creator _id';
+
 var capeSchema = new Mongoose.Schema({
     name: {
         type: String,
@@ -25,8 +27,6 @@ var capeSchema = new Mongoose.Schema({
         type: String
     }
 });
-
-var defaultResults = 'name powerTheme creationMethod powers description dateCreated creator _id';
 
 capeSchema.plugin(random);
 
