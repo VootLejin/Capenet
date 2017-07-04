@@ -22,7 +22,7 @@ app.controller('userSignInController', function($scope, $http, $rootScope){
         };
         $http.post('/user/login', data)
             .then(function success(response){
-                if(response.data._status ==="success") {
+                if(response.data._status ==='success') {
                     $scope.message = "Signed in as " + response.data.user;
                     $rootScope.username = response.data.user;
                 } else {
@@ -47,7 +47,8 @@ app.controller('userSignUpController', function($scope, $http, $rootScope){
                     $rootScope.username = response.data.user;
                     $scope.message = "Sign-up Succeeded. Welcome, " + $rootScope.username + "!";
                 } else {
-                    $scope.message = "Failed to sign up";
+                    console.log(response.data);
+                    $scope.message = "Failed to sign up: "+ response.data._reason;
                 }
                 $scope.newuser = '';
                 $scope.password = '';

@@ -12,6 +12,17 @@ var passportSignup = function(passport){
         },
         function(req, username, password, done){
             findOrCreateUser = function(){
+                // Validate the Name Length
+                if (username.length > 24){
+                    return done(null, false, req.flash('message', 'Name too long (must be fewer then 24 characters)'));
+                }
+                if (username.length < 4){
+                    return done(null, false, req.flash('message', 'Name too long (must be longer then 3 characters)'));
+                }
+                if (password.length < 4){
+                    console.log('Password too short');
+                    return done(null, false, req.flash('message', 'Password too short'));
+                }
                 User.findOne({'username' : username}, function (err, user){
                     if (err){
                         console.log('Error in Signup');
@@ -21,7 +32,7 @@ var passportSignup = function(passport){
                     // User already exists
                     if (user){
                         console.log('User already Exists, username: ' + username);
-                        return done(null, false, req.flash('message', 'user already exists'));
+                        return done(null, false, req.flash('message', 'User already exists'));
                     } else {
                         // No User yet.
                         var newUser = new User();

@@ -23,7 +23,7 @@ var userRoute = function(passport){
 
     /* GET user/home  */
     router.get('/home', isAuthenticated, function(req, res){
-        res.send({user: req.user.username});
+        res.send({_status: 'success', user: req.user.username});
     });
 
     /* User Session handling */
@@ -68,7 +68,7 @@ var userRoute = function(passport){
 
     router.get('/signup-fail', function(req, res){
         console.log("Failed Signup");
-        res.send({_status: 'failure', _reason: 'signup failure'});
+        res.send({_status: 'failure', _reason: req.flash('message')[0]});
     });
 
 

@@ -94,10 +94,18 @@ var capeRoute = function(passport) {
                     //Error Handling
                     console.log("Error: POST /cape")
                 } else {
-                    var reply = {
-                        _status : 'success',
-                        _cape   : result
-                    };
+                    //var reply = {};
+                    if(result.failed){
+                        var reply = {
+                            _status : 'failure',
+                            _reason   : 'One minute between posts please'
+                        }
+                    } else {
+                        var reply = {
+                            _status : 'success',
+                            _cape   : result
+                        }
+                    }
                     res.send(reply);
                 }
             });
