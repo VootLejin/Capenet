@@ -7,21 +7,28 @@
         <md-lists>
             <md-list-items ng-repeat="item in cape.powers">
                 <div class="row">
-                    <div class="col-xs-4 col-md-8">
+                    <div class="col-xs-7 col-md-7">
                         <select ng-model="item.classification" class="form-control">
                             <option ng-repeat="power in defaultClasses">{{power}}</option>
                         </select>
                     </div>
-                    <div class="col-xs-4 col-md-2">
+                    <div class="col-xs-2 col-md-2">
                         <input type="number"
                                id="class-power-level"
                                min="-3" max="13" step="1" value="0"
                                ng-model="item.rating"
                                class="form-control">
                     </div>
-                    <div class="col-xs-4 col-md-2">
+                    <div class="col-xs-2 col-md-2 btn-group">
+                        <div class="btn-group">
+                            <button class="btn btn-default" title="Hybrid Classification">/</button>
+                            <button class="btn btn-default" title="Sub Classifications">()</button>
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-md-1">
                         <button class="btn btn-default pull-right" title="Remove this Classification" ng-click="removePower(item)">-</button>
                     </div>
+
                 </div>
             </md-list-items>
         </md-lists>
