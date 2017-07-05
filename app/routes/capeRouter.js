@@ -27,7 +27,7 @@ var capeRoute = function(passport) {
     /* GET Cape Listing */
     /* Shows 5 capes by default */
     router.get('/', function (req, res, next) {
-        CapeController.getCapesByRecent(req.params.index, function(err, result){
+        CapeController.getCapesByRecent(Number(req.query.index), function(err, result){
            if(err){
                res.send({_status:'failure', _reason:'Failed at capes/ getCapesByRecent'});
            } else {

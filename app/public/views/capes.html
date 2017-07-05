@@ -1,4 +1,4 @@
-<div class="container" ng-init="loadCapeList()">
+<div class="container" >
     <md-list>
         <md-list-item ng-repeat="capes in capeList">
             <div class = "row">
@@ -28,3 +28,4 @@
         </md-list-item>
     </md-list>
 </div>
+<div infinite-scroll="addToCapeList()" infinite-scroll-disabled=stopLoading></div>

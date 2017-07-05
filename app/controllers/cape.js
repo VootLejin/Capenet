@@ -117,10 +117,14 @@ var CapeController = {
             start = startingSpot;
         }
         Cape.find({})
-            .skip(start)
             .limit(10)
+            .skip(start)
             .sort({dateCreated: -1})
             .exec(function (err, capeList) {
+                if(err){
+                    console.log("error in getCapesbyRecent");
+                    console.log(err);
+                }
                 callback(null, capeList);
             });
     },

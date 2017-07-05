@@ -17,6 +17,7 @@ app.controller('capeListingController', function($scope, $http, capeHandlingFact
     // initializers
     $scope.capeList = [];
     capeHandlingFactory.capeList = [];
+    $scope.stopLoading = false;
 
     //functions
     /* Fetch gets an entry from the DB */
@@ -30,10 +31,24 @@ app.controller('capeListingController', function($scope, $http, capeHandlingFact
     };
 
     $scope.loadCapeList = function(){
-        $http.get('cape').then(function success(response){
-            console.log(response);
+        $http({url:'cape', method: "GET", params:{index:$scope.capeList.length}}).then(function success(response){
             console.log(response.data);
             $scope.capeList = response.data;
         })
+    };
+    $scope.addToCapeList = function(){
+        $http({url: 'cape', method: "GET", params: {index: $scope.capeList.length}})
+            .then(function success(response) {
+                if (response.data.length === 0) {
+                    $scope.stopLoading = true;
+                } else {
+                    for (var i = 0; i < response.data.length; i++) {
+                        console.log("NOTICE ME SENPAI");
+                        console.log(response.data[i]);
+                        $scope.capeList.push(response.data[i]);
+                    }
+                }
+            });
+
     }
 });
